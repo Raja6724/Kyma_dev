@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build image
       run: |
-          docker build -t ${HUB}/kyma:${TAG} .
+          docker build -t ${HUB}/kyma-dev:${TAG} .
 
       
     - name: Push the image to GitHub Package Registry
