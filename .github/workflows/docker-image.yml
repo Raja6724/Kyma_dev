@@ -25,5 +25,5 @@ jobs:
       if: ${{ success() }}
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ${HUB} --username ${USER} --password-stdin
-        docker run ghcr.io/deselikem/kyma-dev-demo-demo:latest
-        docker push ghcr.io/deselikem/kyma-dev-demo-demo:latest
+        docker run ghcr.io/deselikem/kyma-dev-demo:latest
+        docker push ghcr.io/deselikem/kyma-dev-demo:latest
