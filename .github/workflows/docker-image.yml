@@ -19,11 +19,11 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build image
       run: |
-          docker build -t ${HUB}/kyma-dev:${TAG} .
-
-      
+          docker build . --tag ghcr.io/deselikem/kyma-dev-demo:latest
+          
     - name: Push the image to GitHub Package Registry
       if: ${{ success() }}
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ${HUB} --username ${USER} --password-stdin
-        docker push ${HUB}/kyma-dev[:${TAG}]
+        docker run ghcr.io/deselikem/kyma-dev-demo-demo:latest
+        docker push ghcr.io/deselikem/kyma-dev-demo-demo:latest
