@@ -2,7 +2,7 @@ name: Build and publish Docker image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 env:
   HUB: ghcr.io
@@ -22,8 +22,8 @@ jobs:
           docker build -t ${HUB}/${GITHUB_REPOSITORY}:${TAG} .
 
       
-    - name: Push the image to Github Package Registry
-      if: ${{ success()}}
+    - name: Push the image to GitHub Package Registry
+      if: ${{ success() }}
       run: |
-        echo ${{ secrets.github_TOKEN }} | docker login ${HUB} --username ${USER} --password-stdin
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login ${HUB} --username ${USER} --password-stdin
         docker push ${HUB}/${GITHUB_REPOSITORY}:${TAG}
