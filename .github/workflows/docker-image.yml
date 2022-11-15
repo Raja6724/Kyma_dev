@@ -26,4 +26,4 @@ jobs:
       if: ${{ success() }}
       run: |
         echo ${{ secrets.GITHUB_TOKEN }} | docker login ${HUB} --username ${USER} --password-stdin
-        docker push ${HUB}/kyma:${TAG} .
+        docker push ${HUB}/kyma
