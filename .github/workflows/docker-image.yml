@@ -1,10 +1,13 @@
-name: Docker Image CI
+name: Build and publish Docker image
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
+
+env:
+  HUB: ghcr.io
+  TAG: latest
+
 
 jobs:
 
@@ -13,6 +16,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - uses: actions/checkout@v2
+    - name: Build image
+      run: |
+          docker build -t ${HUB}/${GITHUB_REPOSITORY}:${TAG} .
+
+      
+    - name: Push the image to GitHub Package Registry
+      if: ${{ success() }}
+      run: |
+        echo ${{ secrets.GITHUB_TOKEN }} | docker login ${HUB} --username ${USER} --password-stdin
+        docker push ${HUB}/${GITHUB_REPOSITORY}:${TAG}
