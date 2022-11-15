@@ -1,0 +1,29 @@
+name: Build and publish Docker image
+
+on:
+  push:
+    branches: [ master ]
+
+env:
+  HUB: ghcr.io
+  TAG: latest
+
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build image
+      run: |
+          docker build -t ${HUB}/${GITHUB_REPOSITORY}:${TAG} .
+
+      
+    - name: Push the image to Github Package Registry
+      if: ${{ success()}}
+      run: |
+        echo ${{ secrets.github_TOKEN }} | docker login ${HUB} --username ${USER} --password-stdin
+        docker push ${HUB}/${GITHUB_REPOSITORY}:${TAG}
