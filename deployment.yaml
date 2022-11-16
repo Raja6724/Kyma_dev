@@ -15,7 +15,7 @@ spec:
         app: kyma-demo  
     spec:     # pod spec                  
       containers: 
-      - image: ghcr.io/raja2148/kyma-demo:latest # image we pushed
+      - image: ghcr.io/raja6724/kyma-dev-demo:latest # image we pushed
         name: kyma-demo  
         imagePullPolicy: Always
         ports:
