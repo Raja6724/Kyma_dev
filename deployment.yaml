@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Kyma-Demo 
+  name: kyma-demo 
   labels:
-    app: Kyma-Demo 
+    app: kyma-demo 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: Kyma-Demo
+      app: kyma-demo
   template:
     metadata:
       labels: # labels to select/identify the deployment
-        app: Kyma-Demo  
+        app: kyma-demo  
     spec:     # pod spec                  
       containers: 
-      - image: ghcr.io/Raja6724/Kyma-Demo:latest # image we pushed
-        name: Kyma-Demo  
+      - image: ghcr.io/raja2148/kyma-demo:latest # image we pushed
+        name: kyma-demo  
         imagePullPolicy: Always
         ports:
         - name: http
@@ -27,26 +27,26 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: Kyma-Demo
+  name: kyma-demo
   labels:
-    app: Kyma-Demo
+    app: kyma-demo
 spec:
   ports:
   - name: http
     port: 4004
     targetPort: 4004
   selector:
-    app: Kyma-Demo
+    app: kyma-demo
 ---
 apiVersion: gateway.kyma-project.io/v1beta1
 kind: APIRule
 metadata:
-  name: Kyma-Demo
+  name: kyma-demo
 spec:
   gateway: kyma-gateway.kyma-system.svc.cluster.local
-  host: Kyma-Demo
+  host: kyma-demo
   service:
-    name: Kyma-Demo
+    name: kyma-demo
     port: 4004
   rules:
   - accessStrategies:
