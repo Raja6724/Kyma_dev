@@ -1,0 +1,20 @@
+
+POST http://localhost:4004/scrap2earn/submitCall
+Content-Type: application/json
+Accept: application/json
+
+{
+    "Product_Name": "Intel® Pentium® Silver N5030 (4 MB cache, 4 cores, 4 threads, up to 3.10 GHz)",
+    "UserId" : "williamlee@mailinator.com"   
+}
+
+
+#################################
+
+POST http://localhost:4004/scrap2earn/userValid
+Content-Type: application/json
+Accept: application/json
+
+{
+    "UserId" : "ulavala.rajasekhar@accenture.com"   
+}
